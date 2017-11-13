@@ -6,6 +6,14 @@ ARG IMAGE_TZ=America/New_York
 
 USER root
 
+# Add some necessary utility packages to bootstrap the install process
+RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    locales \
+    tzdata && \
+    apt-get -q autoremove && \
+    apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
+    
 # Add locales after locale-gen as needed
 # Upgrade packages on image
 # Preparations for sshd
@@ -47,7 +55,6 @@ RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommend
     bzip2 \
     maven \
     git \
-    curl \
     unzip \
     xml2 && \
     apt-get -q autoremove && \
