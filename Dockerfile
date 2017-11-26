@@ -25,3 +25,4 @@ RUN apt-get clean && apt-get update && apt-get install -y --no-install-recommend
     apt-get -q autoremove && \
     apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 
+COPY settings.xml /root/.m2/settings.xml
